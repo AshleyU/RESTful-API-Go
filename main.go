@@ -16,8 +16,8 @@ type Article struct {
 	Content string `json:"content"`
 }
 
-// let's declare a global Articles array
-// that we can then populate in our main function
+// Declaring global Articles array
+// to populate the main function
 // to simulate a database
 var Articles []Article
 
@@ -27,12 +27,12 @@ func returnAllArticles(w http.ResponseWriter, r *http.Request){
 }
 
 func createNewArticle(w http.ResponseWriter, r *http.Request) {
-    // get the body of our POST request
-    // return the string response containing the request body    
+    // gets the body of our POST request
+    // returns the string response containing the request body    
     reqBody, _ := ioutil.ReadAll(r.Body)
 	var article Article 
     json.Unmarshal(reqBody, &article)
-    // update our global Articles array to include
+    // updates our global Articles array to include
     // our new Article
     Articles = append(Articles, article)
 
@@ -40,13 +40,12 @@ func createNewArticle(w http.ResponseWriter, r *http.Request) {
 }
 
 func deleteArticle(w http.ResponseWriter, r *http.Request) {
-    // once again, we will need to parse the path parameters
+    // parses the path parameters
     vars := mux.Vars(r)
-    // we will need to extract the `id` of the article we
-    // wish to delete
+    // extracts the `id` of the article we to delete
     id := vars["id"]
 
-    // we then need to loop through all our articles
+    // loop through all articles
     for index, article := range Articles {
         // if our id path parameter matches one of our
         // articles
@@ -61,10 +60,9 @@ func deleteArticle(w http.ResponseWriter, r *http.Request) {
 }
 
 func updateArticle(w http.ResponseWriter, r *http.Request) {
-    // once again, we will need to parse the path parameters
+    // parse the path parameters
     vars := mux.Vars(r)
-    // we will need to extract the `id` of the article we
-    // wish to delete
+    // extract the `id` of the article to update
     id := vars["id"]
 
 	var updatedEvent Article 
@@ -89,8 +87,8 @@ func returnSingleArticle(w http.ResponseWriter, r *http.Request){
     vars := mux.Vars(r)
     key := vars["id"]
 
-	// Loop over all of our Articles
-    // if the article.Id equals the key we pass in
+	// Loop over all Articles
+    // if the article.Id equals the key passed in
     // return the article encoded as JSON
     for _, article := range Articles {
         if article.Id == key {
