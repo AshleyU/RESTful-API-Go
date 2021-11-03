@@ -1,6 +1,9 @@
 package main
 
 import (
+	"crypto/md5"
+	"crypto/sha1"
+	"crypto/sha256"
 	"fmt"
 	"io/ioutil"
 	"log"
@@ -115,6 +118,22 @@ func handleRequest() {
 }
 
 func main() {
+	//String to be hashed
+	name := "Ashley"
+
+	//Different types of hashing. 
+	//Using the Sum function to computer a hash from a byte
+	//Then we pass the string to be hashed into the byte
+	hmd5 := md5.Sum([]byte(name))
+	hsha1 := sha1.Sum([]byte(name))
+	hsha2 := sha256.Sum256([]byte(name))
+
+	//printing each of the different types of hash to the console
+	fmt.Printf("   MD5: %x\n", hmd5)
+	fmt.Printf("  SHA1: %x\n", hsha1)
+	fmt.Printf("SHA256: %x\n", hsha2)
+	
+	//Creating json data
 	Articles = []Article{
         Article{Id: "1", Title: "Hello", Desc: "Article Description", Content: "Article Content"},
         Article{Id: "2", Title: "Hello 2", Desc: "Article Description", Content: "Article Content"},
