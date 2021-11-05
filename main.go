@@ -117,6 +117,7 @@ func handleRequest() {
 	log.Fatal(http.ListenAndServe(":8081", myRouter))
 }
 
+
 func main() {
 	//String to be hashed
 	name := "Ashley"
